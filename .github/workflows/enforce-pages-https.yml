@@ -26,8 +26,10 @@ jobs:
             exit 0
           fi
 
+          set +e
           output="$(gh api "repos/${REPO}/pages" -X PUT -F https_enforced=true 2>&1)"
           status=$?
+          set -e
           echo "${output}"
 
           if [ "${status}" -eq 0 ]; then
